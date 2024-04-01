@@ -13,26 +13,45 @@
             vertical-align: middle;
             margin-right: 5px;
         }
+
+        /* CSS for rounded image link */
+        .rounded-link {
+            display: inline-block;
+            border-radius: 20%; /* Make it rounded */
+            overflow: hidden; /* Hide any overflow content */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add a shadow for a better look */
+        }
+
+        .rounded-link img {
+            display: block;
+            width: 100%; /* Ensure the image fills the container */
+            height: auto; /* Maintain aspect ratio */
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <nav>
-        <ul>
-            <li><a href="index.html"><img src="bwbl-2022.png" alt="BWBL Logo"></a></li>
-            <li><a href="News.html">News & Media</a></li>
-            <li><a href="Diamond City Park.html">Diamond City Park</a></li>
-            <li><a href="rules.html">Rules</a></li>
-            <li><a href="https://www.leaguelineup.com/schedules.asp?url=bwbl-v2">Schedule & Results</a></li>
-            <li><a href="Standings.html">Standings</a></li>
-            <li><a href="Hall.html">Hall of Fame</a></li>
-            <li><a href="Stats.html">Stats & Records</a></li>
-            <li><a href="DCS.html">Diamond City Sports</a></li>
-            <li><a href="Sponsors.html">Sponsors</a></li>
-        </ul>
-    </nav>
-</header>
+<script src="header.js"></script>
+
+<a href="https://open.spotify.com/show/7LH1lDVIgkl0VWhbiCcviC?si=8e1fa59823a04dcb" class="rounded-link" target="_blank">
+    <img src="ITZLogo.png" alt="In The Zone Podcast">
+</a>
+
+<a href="https://www.youtube.com/@DiamondCitySports/videos" class="rounded-link" target="_blank">
+    <img src="ITZLogo.png" alt="Diamond City Sports YouTube">
+</a>
+
+<a href="https://www.facebook.com/diamondcitysports/" class="rounded-link" target="_blank">
+    <img src="ITZLogo.png" alt="Diamond City Sports Facebook">
+</a>
+
+<a href="https://twitter.com/DCSports570" class="rounded-link" target="_blank">
+    <img src="ITZLogo.png" alt="Diamond City Sports Twitter">
+</a>
+
+<a href="https://www.tiktok.com/@bwbl570?is_from_webapp=1&sender_device=pc" class="rounded-link" target="_blank">
+    <img src="ITZLogo.png" alt="BWBL TikTok">
+</a>
 
 </body>
 </html>
