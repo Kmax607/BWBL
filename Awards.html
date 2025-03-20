@@ -6,30 +6,15 @@
     <title>BWBL Award History</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* CSS for the logo */
-        nav ul li a img {
-            width: 3em;
-            height: auto;
-            vertical-align: middle;
-            margin-right: 5px;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
         main {
-            max-width: 800px; /* Limits max width for large screens */
-            margin: 0 auto; /* Centers content */
-            padding: 0 5%; /* Adjusts side padding based on screen width */
-        }
-
-        /* Flexbox for columns */
-        .container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .column {
-            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
         }
 
@@ -38,238 +23,82 @@
             margin-bottom: 30px;
         }
 
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .column {
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
         footer {
             text-align: center;
-            margin-top: 50px;
+            padding: 20px;
+            background-color: #333;
+            color: white;
         }
     </style>
 </head>
 <body>
-
 <main>
-
     <script src="header.js"></script>
-
     <h1>Champions and Award Winners</h1>
 
-    <!-- First row of columns -->
     <div class="container">
         <div class="column">
             <strong>Red Robin Cup Champions</strong>
-            <p>
-                5 Lokos (2023)<br>
-                False Idols (2022)<br>
-                False Idols (2021)<br>
-                Scared Hitless (2020)<br>
-                Balls Deep (2019)<br>
-                Snack Shack (2018)<br>
-                Snack Shack (2017)<br>
-                Jagerbombers (2016)<br>
-                Jagerbombers (2015)<br>
-                Vipers (2014)<br>
-                Bases Loaded (2013)<br>
-                Bad Meets Evil (2012)<br>
-                Saturday Crush (2011)<br>
-                Saturday Crush (2010)<br>
-                Dragons (2009)<br>
-                Dragons (2008)<br>
-                Saturday Crush (2007)<br>
-                Saturday Crush (2006)<br>
-                Pittston Park Boys (2005)<br>
-                Rynk's Sports Bar (2004)
-            </p>
+            <p>5 Lokos (2023)<br>False Idols (2022)<br>False Idols (2021)<br>Scared Hitless (2020)</p>
         </div>
-
         <div class="column">
             <strong>Charity Classic Champions</strong>
-            <p>
-                Kings of the North/1776 (2023)<br>
-                False Lokos (2022)<br>
-                1776 (2021)<br>
-                Team Backpack (2019)<br>
-                Blue Kamikazes (2018)<br>
-                Master Batters (2017)<br>
-                Jagerbombers (2016)<br>
-                Saturday Crush (2015)<br>
-                Steve's Team (2014)<br>
-                Bases Loaded (2013)<br>
-                Bad Meets Evil (2012)<br>
-                Saturday Crush American (2011)<br>
-                Jagerbombers (2010)<br>
-                Dragons (2009)<br>
-                WD40 (2008)<br>
-                Dragons (2007)<br>
-                Loadbeats (2006)<br>
-                Rynk's Sports Bar (2005)
-            </p>
+            <p>Kings of the North/1776 (2023)<br>False Lokos (2022)<br>1776 (2021)</p>
         </div>
-
         <div class="column">
             <strong>Autumn Classic Champions</strong>
-            <p>
-                Jagerbombers (2022)<br>
-                Wiffleball Junkies (2018)<br>
-                Jagerbombers (2016)<br>
-                Alex's Team (2014)<br>
-                Backdoor Bandits & Bad Meets Evil (2013)<br>
-                Backdoor Bandits & Bad Meets Evil (2012)
-            </p>
+            <p>Jagerbombers (2022)<br>Wiffleball Junkies (2018)<br>Jagerbombers (2016)</p>
         </div>
     </div>
 
-    <!-- Second row of columns -->
     <div class="container">
         <div class="column">
             <strong>Rookie of the Year</strong>
-            <p>
-                Auggie George (2022) - 5 Lokos<br>
-                Jakson Amend (2021) - Roadkill<br>
-                Nick Pugh (2020) - Scared Hitless<br>
-                Brett Caladie (2019) - Balls Deep<br>
-                Curtis Brieling (2018) - Full Count<br>
-                Chris Faulkner (2017) - Bases Loaded<br>
-                JJ Neely (2016) - Shooting Stars<br>
-                Johnny "X" Flanagan (2015) - The Kekambas<br>
-                Kevin Rimmer (2014) - Master Batters<br>
-                Damian Williams (2013) - Sweet Browns<br>
-                Eric Negron (2012) - Sweet Dreams
-            </p>
+            <p>Auggie George (2022) - 5 Lokos<br>Jakson Amend (2021) - Roadkill</p>
         </div>
-
         <div class="column">
             <strong>Cy Young Award</strong>
-            <p>
-                Brett Caladie (2022) - False Idols<br>
-                Zach Artim (2021) - 1776<br>
-                Zach Artim (2020) - Flying Pierogies<br>
-                Zach Artim (2019) - Special K<br>
-                Curtis Wagner (2018) - Snack Shack<br>
-                Alex Fuchylo (2017) - Gamecocks<br>
-                Zach Artim (2016) - Jagerbombers<br>
-                Josh Sorber (2015) - Jagerbombers<br>
-                Jake Lukachik (2014) - Backdoor Bandits<br>
-                Tom Hannon (2013) - Bad Meets Evil<br>
-                Bobby Loftus, Jr. (2012) - Bad Meets Evil<br>
-                Bob Loftus, Sr. (2011) - Saturday Crush<br>
-                Bobby Loftus, Jr. (2010) - Jagerbombers/Dragons<br>
-                Ryan Hart (2009) - Saturday Crush<br>
-                Bob Loftus, Sr. (2008) - Dragons<br>
-                Bob Loftus, Sr. (2007) - Dragons<br>
-                Tom Hannon (2006) - Dragons<br>
-                Steve Thompson (2005) - Mericle Real Estate<br>
-                George Alles (2004) - Leary's Kork & Keg
-            </p>
+            <p>Brett Caladie (2022) - False Idols<br>Zach Artim (2021) - 1776</p>
         </div>
-
         <div class="column">
             <strong>Season MVP</strong>
-            <p>
-                Brett Caladie (2022) - False Idols<br>
-                Brett Caladie (2021) - False Idols<br>
-                Nick Pugh (2020) - Scared Hitless<br>
-                Zach Artim (2019) - Special K<br>
-                Alex Fuchylo (2018) - Full Count<br>
-                Alex Fuchylo (2017) - Gamecocks<br>
-                Steve Owazany (2016) - Jagerbombers<br>
-                Daulton Shearer (2015) - Bases Loaded<br>
-                Alex Fuchylo (2014) - Bases Loaded<br>
-                Mark Belles (2013) - Saturday Crush<br>
-                Doug Novitski (2012) - Vipers<br>
-                Bob Loftus, Sr. (2011) - Saturday Crush<br>
-                Tom Hannon (2010) - Dragons<br>
-                Ryan Hart (2009) - Saturday Crush
-            </p>
+            <p>Brett Caladie (2022) - False Idols<br>Brett Caladie (2021) - False Idols</p>
         </div>
     </div>
 
-    <!-- Third row of columns -->
     <div class="container">
         <div class="column">
             <strong>Sportsman of the Year</strong>
-            <p>
-                Dillan Ryman (2022) - Diamond Dogs
-            </p>
+            <p>Dillan Ryman (2022) - Diamond Dogs</p>
         </div>
-
         <div class="column">
             <strong>Playoff MVP</strong>
-            <p>
-                Brett Caladie (2022) - False Idols<br>
-                Tom Hannon (2021) - False Idols<br>
-                Nick Pugh (2020) - Scared Hitless<br>
-                Anthony Caladie (2019) - Balls Deep<br>
-                Curtis Wagner (2018) - Snack Shack<br>
-                Rob Hess (2017) - Snack Shack<br>
-                Steve Owazany (2016) - Jagerbombers<br>
-                Josh Sorber (2015) - Jagerbombers<br>
-                Josh Sorber (2014) - Vipers<br>
-                Alex Fuchylo (2013) - Bases Loaded<br>
-                Tom Hannon (2012) - Bad Meets Evil<br>
-                Mark Belles (2011) - Saturday Crush<br>
-                Bob Loftus, Sr. (2010) - Saturday Crush<br>
-                Tom Hannon (2009) - Dragons<br>
-                Bob Loftus, Sr. (2008) - Dragons<br>
-                Ryan Hart (2007) - Saturday Crush<br>
-                Shawn Aston and Ryan Hart (2006) - Saturday Crush<br>
-                Bob Loftus, Sr. (2005) - Pittston Park Boys<br>
-                Steve Pinnacoli (2004) - Rynk's Sports Bar
-            </p>
+            <p>Brett Caladie (2022) - False Idols<br>Tom Hannon (2021) - False Idols</p>
         </div>
-
         <div class="column">
             <strong>Most Improved</strong>
-            <p>
-                Teddy Kraus (2022) - Roadkill<br>
-                Mike Simon (2021) - Scared Hitless<br>
-                Mike Cinti (2020) - Electric City Express<br>
-                Joey Dougher (2019) - Team Backpack<br>
-                John Kotsko (2018) - Chafing the Dream<br>
-                Aubrey Wynn (2017) - Electric City Express<br>
-                Fran George (2016) - Bad Ballers<br>
-                Daulton Shearer (2015) - Bases Loaded<br>
-                Rob Hess (2014) - Clam Blasters<br>
-                Steve Owazany (2013) - Vipers
-            </p>
+            <p>Teddy Kraus (2022) - Roadkill<br>Mike Simon (2021) - Scared Hitless</p>
         </div>
     </div>
-
-    <!-- Fourth row of columns -->
-    <div class="container">
-        <div class="column">
-            <strong>Captain of the Year</strong>
-            <p>
-                Max Kraus (2022) - Roadkill<br>
-                John Kotsko (2021) - False Idols<br>
-                Brett Rooney (2020) - Scared Hitless<br>
-                John Kotsko (2019) - Balls Deep<br>
-                Daulton Shearer (2018) - Snack Shack<br>
-                Andy Peck (2017) - Saturday Crush<br>
-                Andy Peck (2016) - Saturday Crush<br>
-                Tony Bauer (2015) - Bad Ballers<br>
-                John Kotsko (2014) - Shooting Stars
-            </p>
-        </div>
-
-        <div class="column">
-            <strong>Silver Slugger</strong>
-            <p>
-                Brett Caladie (2022) - False Idols<br>
-                Brett Caladie (2021) - False Idols<br>
-                Jake Lukachik (2020) - Kings of the North<br>
-                Alex Fuchylo (2019) - Kings of the North<br>
-                Alex Fuchylo (2018) - Full Count<br>
-                Mark Belles (2017) - Special K
-            </p>
-        </div>
-    </div>
-
 </main>
-
-<br>
 
 <footer>
     <p>The BWBL is officially sanctioned by The Wiffle Ball, Inc., 275 Bridgeport Ave., Shelton, CT 06484</p>
 </footer>
-
 </body>
 </html>
