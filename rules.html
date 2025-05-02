@@ -315,5 +315,17 @@
     <p>&copy; 2024 BWBL. All rights reserved.</p>
 </footer>
 
+<script>
+    fetch('header.html')
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+        });
+
+    function toggleMenu() {
+        document.getElementById("dropdown-nav").classList.toggle("show");
+    }
+</script>
+
 </body>
 </html>

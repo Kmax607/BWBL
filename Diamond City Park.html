@@ -39,6 +39,18 @@
 
 <br><p>For the complete construction story, click <a href="https://mrsickle.blogspot.com/">HERE</a>.</p><br>
 
+<script>
+    fetch('header.html')
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+        });
+
+    function toggleMenu() {
+        document.getElementById("dropdown-nav").classList.toggle("show");
+    }
+</script>
+
 </body>
 </main>
 

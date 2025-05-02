@@ -143,5 +143,19 @@
 <footer>
     <p>The BWBL is officially sanctioned by The Wiffle Ball, Inc., 275 Bridgeport Ave., Shelton, CT 06484</p>
 </footer>
+
+<script>
+    fetch('header.html')
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById('header-container').innerHTML = data;
+        });
+
+    function toggleMenu() {
+        document.getElementById("dropdown-nav").classList.toggle("show");
+    }
+</script>
+
+
 </body>
 </html>
