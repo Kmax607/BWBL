@@ -263,7 +263,7 @@ nav ul li a:hover {
         max-width: 1200px;
         margin: auto;
         padding-bottom: 20px;
-        text-align: left;
+        text-align: center;
     }
 
     .footer-section {
@@ -299,9 +299,8 @@ nav ul li a:hover {
 }
 
 .hof-heading h1 {
-    font-size: 3em;
+    font-size: 2.6em;
     letter-spacing: 3px;
-    text-transform: uppercase;
     color: #333;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
     font-weight: bold;
