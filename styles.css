@@ -256,16 +256,51 @@ nav ul li a:hover {
 /* Responsive layout */
 @media (max-width: 768px) {
     .footer-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        max-width: 1200px;
+        margin: auto;
+        padding-bottom: 20px;
+        gap: 60px;
+        align-items: start;
     }
 
     .footer-section {
-        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
     }
 
     .footer-brand img {
         margin: 0 auto 12px;
     }
+
+    .footer-brand {
+        text-align: center;
+    }
+
 }
+.footer-links-group {
+    display: flex;
+    gap: 60px; /* Controls spacing between Quick and External */
+    justify-content: center;
+    flex: 2;
+}
+
+.hof-heading {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    color: #222;
+}
+
+.hof-heading h1 {
+    font-size: 3em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #333;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    font-weight: bold;
+    margin: 0;
+}
+
