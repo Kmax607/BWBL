@@ -256,19 +256,23 @@ nav ul li a:hover {
 /* Responsive layout */
 @media (max-width: 768px) {
     .footer-content {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 60px;
         max-width: 1200px;
         margin: auto;
         padding-bottom: 20px;
-        gap: 60px;
-        align-items: start;
+        text-align: left;
     }
 
     .footer-section {
+        flex: 1 1 250px; /* grow, shrink, base width */
         display: flex;
         flex-direction: column;
         gap: 8px;
+        min-width: 200px;
+        max-width: 300px;
     }
 
     .footer-brand img {
