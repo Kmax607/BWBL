@@ -365,6 +365,56 @@ nav ul li a:hover {
 .dcp_link a:hover {
     color: #FFA500;
 }
+
+.carousel {
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+}
+
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-item {
+    width: 80%; /* Larger images */
+    text-align: center;
+}
+
+.carousel-item img {
+    width: 100%;
+    max-width: 600px; /* Increase this if you want even bigger images */
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+/* Move nav arrows below the image */
+.carousel-controls {
+    margin-top: 20px;
+}
+
+.prev, .next {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 18px;
+    border: none;
+    margin: 0 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.prev:hover, .next:hover {
+    background-color: #FFA500;
+}
+
+
 html {
     scroll-behavior: smooth;
 }
