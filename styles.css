@@ -75,12 +75,12 @@ footer p {
 .blog-title {
     font-size: 1.5em;
     margin: 0 0 10px;
-    text-decoration: underline;
-    color: #273fe5; /* Primary color */
+    text-decoration: none;
+    color: #333;
 }
 
 .blog-title:hover {
-    color: #061BB0; /* Secondary color */
+    color: #FFA500;
     text-decoration: none; /* Remove underline on hover */
 }
 
