@@ -347,7 +347,16 @@ nav ul li a:hover {
 }
 
 .toc a:hover {
-    color: #FFA500; /* matches your hover color elsewhere */
+    color: #FFA500;
+}
+
+.dcp_link a {
+    text-decoration: none;
+    color: inherit; /* optional: match surrounding text color */
+}
+
+.dcp_link a:hover {
+    color: #FFA500;
 }
 
 html {
