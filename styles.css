@@ -350,15 +350,21 @@ nav ul li a:hover {
     color: #FFA500;
 }
 
+.dcp_link {
+    text-align: center;
+    margin: 20px 0; /* optional spacing */
+}
+
 .dcp_link a {
     text-decoration: none;
-    color: inherit; /* optional: match surrounding text color */
+    color: inherit;
+    font-weight: bold; /* optional */
+    transition: color 0.3s ease;
 }
 
 .dcp_link a:hover {
     color: #FFA500;
 }
-
 html {
     scroll-behavior: smooth;
 }
