@@ -6,127 +6,119 @@
     <title>BWBL Home</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="bwbl-2022.png">
+
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f0f0f0;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
 
-    .big-t {
-        font-size: 2.5em;
-        text-align: center;
-        margin-top: 50px;
-        color: #333;
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        font-weight: bold;
-        text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-    }
-
-    .image-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 18px;
-    }
-
-    .image-container img {
-        width: 85%;
-        max-width: 1000px;
-        height: auto;
-        border-radius: 10px;
-    }
-
-    .logo-container {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    .logo-container img {
-        max-width: 300px;
-        height: auto;
-    }
-
-    /* CSS for the logo */
-    nav ul li a img {
-        width: 3em;
-        height: auto;
-        vertical-align: middle;
-        margin-right: 5px;
-    }
-
-    /* Desktop only */
-    @media (min-width: 1024px) {
         .big-t {
-            font-size: 3.75em; /* 150% larger */
+            font-size: 2.5em;
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: bold;
+            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 18px;
         }
 
         .image-container img {
-            width: 100%;
-            max-width: 1500px; /* 150% larger than 1000px */
+            width: 85%;
+            max-width: 1000px;
+            height: auto;
+            border-radius: 10px;
         }
-    }
-</style>
+
+        .logo-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .logo-container img {
+            max-width: 300px;
+            height: auto;
+        }
+
+        /* CSS for the logo */
+        nav ul li a img {
+            width: 3em;
+            height: auto;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        /* Desktop only */
+        @media (min-width: 1024px) {
+            .big-t {
+                font-size: 3.75em;
+            }
+
+            .image-container img {
+                width: 100%;
+                max-width: 1500px;
+            }
+        }
+    </style>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1009184751283570"
-         crossorigin="anonymous"></script>
+            crossorigin="anonymous"></script>
 </head>
 <body>
 
 <script src="header.js"></script>
+
 <br>
+
 <div class="big-t">
     Welcome to the Home of the BWBL
 </div>
+
 <br><br>
 
 <div class="image-container">
-    <img src="New BWBL Home Image.png">
+    <img src="New BWBL Home Image.png" alt="BWBL Home">
 </div>
 
-<p>
+<p></p>
 
-
-
-
-
-</p>
 <br><br><br>
+
 <div class="logo-container">
     <img src="bwbl-2022.png" alt="BWBL Logo">
 </div>
 
-
-<script data-goatcounter="https://bwbl.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-
-
 <p>
-
     <br><br><br>
-
-
-
-
-
 </p>
-
 
 <div id="footer-container"></div>
 
 <script>
     fetch('footer.html')
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById('footer-container').innerHTML = data;
-    });
-    
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-container').innerHTML = data;
+        });
+
     function toggleMenu() {
         document.getElementById("dropdown-nav").classList.toggle("show");
     }
 </script>
 
+<!-- GoatCounter Visitor Tracking -->
+<script data-goatcounter="https://bwbl.goatcounter.com/count"
+        async
+        src="//gc.zgo.at/count.js"></script>
 
 </body>
 </html>
