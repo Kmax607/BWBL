@@ -312,52 +312,52 @@ document.getElementById("bestScore").textContent=bestScore;
 const hittingStats=[
 {
 column:"AVG",
-label:"higher Batting Average",
+label:"had a higher batting average",
 higher:true
 },
 {
 column:"OBP",
-label:"higher On Base Percentage",
+label:"had a higher on base percentage",
 higher:true
 },
 {
 column:"H",
-label:"more Hits",
+label:"had more hits",
 higher:true
 },
 {
 column:"2B",
-label:"more Doubles",
+label:"had more doubles",
 higher:true
 },
 {
 column:"3B",
-label:"more Triples",
+label:"had more triples",
 higher:true
 },
 {
 column:"HR",
-label:"more Home Runs",
+label:"had more home runs",
 higher:true
 },
 {
 column:"RBI",
-label:"more RBI",
+label:"had more runs batted in",
 higher:true
 },
 {
 column:"R",
-label:"more Runs",
+label:"scored more runs",
 higher:true
 },
 {
 column:"BB",
-label:"more Walks",
+label:"drew more walks",
 higher:true
 },
 {
 column:"K",
-label:"more Strikeouts",
+label:"struck out more",
 higher:true
 }
 ];
@@ -365,37 +365,37 @@ higher:true
 const pitchingStats=[
 {
 column:"W",
-label:"more Wins",
+label:"had more pitching wins",
 higher:true
 },
 {
 column:"ERA",
-label:"lower ERA",
+label:"had a lower ERA",
 higher:false
 },
 {
 column:"K",
-label:"more Strikeouts",
+label:"struck out more batters",
 higher:true
 },
 {
 column:"WHIP",
-label:"lower WHIP",
+label:"had a lower WHIP",
 higher:false
 },
 {
 column:"IP",
-label:"more Innings Pitched",
+label:"pitched more innings",
 higher:true
 },
 {
 column:"BB",
-label:"fewer Walks Allowed",
+label:"allowed fewer walks",
 higher:false
 },
 {
 column:"H",
-label:"fewer Hits Allowed",
+label:"allowed fewer hits",
 higher:false
 }
 ];
@@ -579,7 +579,7 @@ function nextQuestion(){
         useHitters ? "Hitting" : "Pitching";
 
     document.getElementById("question").textContent=
-        "Who had "+stat.label+"?";
+        "Who "+stat.label+"?";
 
     document.getElementById("player1Name").textContent=
         players.a.Name;
