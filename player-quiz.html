@@ -1,1 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BWBL Player Quiz</title>
 
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="bwbl-2022.png">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1009184751283570"
+        crossorigin="anonymous"></script>
+
+    <style>
+
+        body{
+            margin:0;
+            background:#f4f6f8;
+            font-family:Arial, Helvetica, sans-serif;
+            color:#222;
+        }
+
+        main{
+            max-width:1000px;
+            margin:40px auto;
+            padding:0 20px;
+        }
+
+        h1{
+            text-align:center;
+            margin-bottom:5px;
+            color:#0b2e59;
+        }
+
+        .subtitle{
+            text-align:center;
+            color:#666;
+            margin-bottom:35px;
+        }
+
+        .scoreboard{
+            display:flex;
+            justify-content:center;
+            gap:35px;
+            flex-wrap:wrap;
+            margin-bottom:35px;
+        }
+
+        .score-box{
+            background:white;
+            padding:18px 28px;
+            border-radius:12px;
+            box-shadow:0 3px 10px rgba(0,0,0,.12);
+            text-align:center;
+            min-width:180px;
+        }
+
+        .score-title{
+            font-size:14px;
+            color:#777;
+            margin-bottom:6px;
+        }
+
+        .score-value{
+            font-size:34px;
+            font-weight:bold;
+            color:#0b2e59;
+        }
+
+        #questionCard{
+            background:white;
+            border-radius:15px;
+            padding:35px;
+            box-shadow:0 4px 14px rgba(0,0,0,.12);
+        }
+
+        #questionType{
+            text-align:center;
+            font-size:14px;
+            color:#777;
+            margin-bottom:10px;
+            letter-spacing:1px;
+            text-transform:uppercase;
+        }
+
+        #question{
+            font-size:34px;
+            text-align:center;
+            margin-bottom:45px;
+            color:#0b2e59;
+            font-weight:bold;
+        }
+
+        .players{
+            display:flex;
+            gap:35px;
+            justify-content:center;
+            align-items:center;
+            flex-wrap:wrap;
+        }
+
+        .player{
+            flex:1;
+            min-width:280px;
+            max-width:420px;
+            background:#fafafa;
+            border:3px solid #d8d8d8;
+            border-radius:16px;
+            padding:40px 25px;
+            cursor:pointer;
+            transition:.18s;
+            user-select:none;
+        }
+
+        .player:hover{
+            transform:translateY(-5px);
+            border-color:#0b2e59;
+            box-shadow:0 10px 18px rgba(0,0,0,.15);
+        }
+
+        .player.correct{
+            border-color:#27ae60;
+            background:#eafaf0;
+        }
+
+        .player.wrong{
+            border-color:#c0392b;
+            background:#fdeaea;
+        }
+
+        .player.disabled{
+            pointer-events:none;
+        }
+
+        .player-name{
+            font-size:28px;
+            text-align:center;
+            font-weight:bold;
+            line-height:1.3;
+        }
+
+        .vs{
+            font-size:34px;
+            font-weight:bold;
+            color:#666;
+        }
+
+        #result{
+            text-align:center;
+            font-size:26px;
+            font-weight:bold;
+            margin-top:40px;
+            min-height:35px;
+        }
+
+        #details{
+            text-align:center;
+            margin-top:18px;
+            line-height:1.8;
+            font-size:19px;
+        }
+
+        .green{
+            color:#27ae60;
+        }
+
+        .red{
+            color:#c0392b;
+        }
+
+        button{
+            display:block;
+            margin:35px auto 0;
+            border:none;
+            background:#0b2e59;
+            color:white;
+            padding:15px 35px;
+            font-size:18px;
+            border-radius:10px;
+            cursor:pointer;
+            transition:.15s;
+        }
+
+        button:hover{
+            background:#17477f;
+        }
+
+        button:disabled{
+            opacity:.45;
+            cursor:not-allowed;
+        }
+
+        @media(max-width:800px){
+
+            #question{
+                font-size:28px;
+            }
+
+            .player{
+                min-width:100%;
+            }
+
+            .vs{
+                width:100%;
+                text-align:center;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div id="header-container"></div>
+
+<script>
+fetch('header.html')
+.then(r=>r.text())
+.then(html=>{
+    document.getElementById('header-container').innerHTML=html;
+});
+
+function toggleMenu(){
+    document.getElementById("dropdown-nav").classList.toggle("show");
+}
+</script>
+
+<main>
+
+<h1>BWBL Player Quiz</h1>
+
+<div class="subtitle">
+Can you pick the player with the better stat?
+</div>
+
+<div class="scoreboard">
+
+    <div class="score-box">
+        <div class="score-title">Current Score</div>
+        <div id="score" class="score-value">0</div>
+    </div>
+
+    <div class="score-box">
+        <div class="score-title">Best Score</div>
+        <div id="bestScore" class="score-value">0</div>
+    </div>
+
+</div>
+
+<div id="questionCard">
+
+    <div id="questionType"></div>
+
+    <div id="question"></div>
+
+    <div class="players">
+
+        <div id="player1" class="player">
+            <div id="player1Name" class="player-name"></div>
+        </div>
+
+        <div class="vs">VS</div>
+
+        <div id="player2" class="player">
+            <div id="player2Name" class="player-name"></div>
+        </div>
+
+    </div>
+
+    <div id="result"></div>
+
+    <div id="details"></div>
+
+    <button id="nextBtn" style="display:none;">
+        Next Question
+    </button>
+
+    <button id="restartBtn" style="display:none;">
+        Play Again
+    </button>
+
+</div>
+
+</main>
+
+<div id="footer-container"></div>
+
+<script>
+
+fetch("footer.html")
+.then(r=>r.text())
+.then(html=>{
+    document.getElementById("footer-container").innerHTML=html;
+});
+
+const hittingURL =
+"https://docs.google.com/spreadsheets/d/10_o08RpZl0erhsU5kb2RT-Bga5h3y1EM6U1SgIZ9DOM/export?format=csv&gid=1351179410&t="+Date.now();
+
+const pitchingURL =
+"https://docs.google.com/spreadsheets/d/10_o08RpZl0erhsU5kb2RT-Bga5h3y1EM6U1SgIZ9DOM/export?format=csv&gid=1341972330&t="+Date.now();
+
+let hitters=[];
+let pitchers=[];
+
+let currentQuestion=null;
+let score=0;
+let bestScore=parseInt(localStorage.getItem("bwblBestScore"))||0;
+
+document.getElementById("bestScore").textContent=bestScore;
+
+const hittingStats=[
+{
+column:"AVG",
+label:"higher Batting Average",
+higher:true
+},
+{
+column:"OBP",
+label:"higher On Base Percentage",
+higher:true
+},
+{
+column:"H",
+label:"more Hits",
+higher:true
+},
+{
+column:"2B",
+label:"more Doubles",
+higher:true
+},
+{
+column:"3B",
+label:"more Triples",
+higher:true
+},
+{
+column:"HR",
+label:"more Home Runs",
+higher:true
+},
+{
+column:"RBI",
+label:"more RBI",
+higher:true
+},
+{
+column:"R",
+label:"more Runs",
+higher:true
+},
+{
+column:"BB",
+label:"more Walks",
+higher:true
+},
+{
+column:"K",
+label:"more Strikeouts",
+higher:true
+}
+];
+
+const pitchingStats=[
+{
+column:"W",
+label:"more Wins",
+higher:true
+},
+{
+column:"ERA",
+label:"lower ERA",
+higher:false
+},
+{
+column:"K",
+label:"more Strikeouts",
+higher:true
+},
+{
+column:"WHIP",
+label:"lower WHIP",
+higher:false
+},
+{
+column:"IP",
+label:"more Innings Pitched",
+higher:true
+},
+{
+column:"BB",
+label:"fewer Walks Allowed",
+higher:false
+},
+{
+column:"H",
+label:"fewer Hits Allowed",
+higher:false
+}
+];
+function parseCSV(text){
+
+    const rows=text.trim().split(/\r?\n/);
+
+    const headers=rows[0].split(",").map(h=>h.trim());
+
+    const data=[];
+
+    for(let i=1;i<rows.length;i++){
+
+        if(!rows[i].trim()) continue;
+
+        const values=[];
+        let current="";
+        let inside=false;
+
+        for(const ch of rows[i]){
+
+            if(ch=='"'){
+                inside=!inside;
+                continue;
+            }
+
+            if(ch=="," && !inside){
+                values.push(current);
+                current="";
+            }else{
+                current+=ch;
+            }
+
+        }
+
+        values.push(current);
+
+        const obj={};
+
+        headers.forEach((h,index)=>{
+            obj[h]=values[index] ? values[index].trim() : "";
+        });
+
+        data.push(obj);
+
+    }
+
+    return data;
+
+}
+
+async function loadData(){
+
+    const hitText=await fetch(hittingURL,{cache:"no-store"}).then(r=>r.text());
+
+    const pitchText=await fetch(pitchingURL,{cache:"no-store"}).then(r=>r.text());
+
+    hitters=parseCSV(hitText);
+
+    pitchers=parseCSV(pitchText);
+
+    hitters=hitters.filter(p=>
+
+        p.Name &&
+        p.Name!="Totals" &&
+        Number(p.GP)>=5
+
+    );
+
+    pitchers=pitchers.filter(p=>
+
+        p.Name &&
+        p.Name!="Totals" &&
+        parseFloat(p.IP)>=5
+
+    );
+
+    nextQuestion();
+
+}
+
+function randomItem(arr){
+
+    return arr[Math.floor(Math.random()*arr.length)];
+
+}
+
+function numeric(v){
+
+    if(v===undefined) return NaN;
+
+    return parseFloat(
+        String(v)
+            .replace("%","")
+            .replace(",","")
+            .trim()
+    );
+
+}
+
+function choosePlayers(players,column,higher){
+
+    let attempts=0;
+
+    while(attempts<500){
+
+        attempts++;
+
+        const a=randomItem(players);
+        const b=randomItem(players);
+
+        if(a.Name===b.Name) continue;
+
+        const av=numeric(a[column]);
+        const bv=numeric(b[column]);
+
+        if(isNaN(av)||isNaN(bv)) continue;
+
+        if(av===bv) continue;
+
+        const diff=Math.abs(av-bv);
+
+        const max=Math.max(Math.abs(av),Math.abs(bv));
+
+        if(max===0) continue;
+
+        const pct=diff/max;
+
+        if(pct>.35) continue;
+
+        return{
+            a,
+            b,
+            av,
+            bv
+        };
+
+    }
+
+    return null;
+
+}
+
+function nextQuestion(){
+
+    document.getElementById("result").textContent="";
+    document.getElementById("details").innerHTML="";
+
+    document.getElementById("nextBtn").style.display="none";
+
+    document.getElementById("restartBtn").style.display="none";
+
+    const useHitters=Math.random()<0.5;
+
+    const stat=randomItem(
+        useHitters ? hittingStats : pitchingStats
+    );
+
+    const players=choosePlayers(
+        useHitters ? hitters : pitchers,
+        stat.column,
+        stat.higher
+    );
+
+    if(!players){
+
+        nextQuestion();
+        return;
+
+    }
+
+    currentQuestion={
+
+        ...players,
+        stat,
+        useHitters
+
+    };
+
+    document.getElementById("questionType").textContent=
+        useHitters ? "Hitting" : "Pitching";
+
+    document.getElementById("question").textContent=
+        "Who had the "+stat.label+"?";
+
+    document.getElementById("player1Name").textContent=
+        players.a.Name;
+
+    document.getElementById("player2Name").textContent=
+        players.b.Name;
+
+    document.getElementById("player1").className="player";
+    document.getElementById("player2").className="player";
+
+}
+
+function answer(choice){
+
+    if(!currentQuestion) return;
+
+    document.getElementById("player1").classList.add("disabled");
+    document.getElementById("player2").classList.add("disabled");
+
+    const better=currentQuestion.stat.higher
+        ? (currentQuestion.av>currentQuestion.bv ? 1 : 2)
+        : (currentQuestion.av<currentQuestion.bv ? 1 : 2);
+
+    const correct=choice===better;
+
+    const correctCard=document.getElementById(
+        better===1 ? "player1" : "player2"
+    );
+
+    correctCard.classList.add("correct");
+
+    if(!correct){
+
+        const wrongCard=document.getElementById(
+            choice===1 ? "player1" : "player2"
+        );
+
+        wrongCard.classList.add("wrong");
+
+    }
+
+    document.getElementById("details").innerHTML=
+
+        "<strong>"+currentQuestion.a.Name+
+        "</strong>: "+currentQuestion.a[currentQuestion.stat.column]+
+        "<br><strong>"+currentQuestion.b.Name+
+        "</strong>: "+currentQuestion.b[currentQuestion.stat.column];
+
+    if(correct){
+
+        score++;
+
+        document.getElementById("score").textContent=score;
+
+        document.getElementById("result").innerHTML=
+            "<span class='green'>Correct!</span>";
+
+        document.getElementById("nextBtn").style.display="block";
+
+    }else{
+
+        document.getElementById("result").innerHTML=
+            "<span class='red'>Incorrect! Game Over.</span>";
+
+        if(score>bestScore){
+
+            bestScore=score;
+
+            localStorage.setItem(
+                "bwblBestScore",
+                bestScore
+            );
+
+            document.getElementById("bestScore").textContent=
+                bestScore;
+
+        }
+
+        document.getElementById("restartBtn").style.display="block";
+
+    }
+
+}
+
+document.getElementById("player1")
+.addEventListener("click",()=>answer(1));
+
+document.getElementById("player2")
+.addEventListener("click",()=>answer(2));
+
+document.getElementById("nextBtn")
+.addEventListener("click",()=>{
+
+    document.getElementById("player1")
+        .classList.remove("disabled");
+
+    document.getElementById("player2")
+        .classList.remove("disabled");
+
+    nextQuestion();
+
+});
+
+document.getElementById("restartBtn")
+.addEventListener("click",()=>{
+
+    score=0;
+
+    document.getElementById("score").textContent=0;
+
+    document.getElementById("player1")
+        .classList.remove("disabled");
+
+    document.getElementById("player2")
+        .classList.remove("disabled");
+
+    nextQuestion();
+
+});
+
+loadData();
+
+</script>
+
+</body>
+</html>
