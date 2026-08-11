@@ -498,35 +498,38 @@ function numeric(v){
 
 function choosePlayers(players,column,higher){
 
-    let attempts=0;
+    // Start at 100% difference allowed and decrease by 5% each correct answer
+    const maxDifference = Math.max(0.05, 1 - (score * 0.05));
 
-    while(attempts<500){
+    let attempts = 0;
+
+    while(attempts < 1000){
 
         attempts++;
 
-        const a=randomItem(players);
-        const b=randomItem(players);
+        const a = randomItem(players);
+        const b = randomItem(players);
 
-        if(a.Name===b.Name) continue;
+        if(a.Name === b.Name) continue;
 
-        const av=numeric(a[column]);
-        const bv=numeric(b[column]);
+        const av = numeric(a[column]);
+        const bv = numeric(b[column]);
 
-        if(isNaN(av)||isNaN(bv)) continue;
+        if(isNaN(av) || isNaN(bv)) continue;
 
-        if(av===bv) continue;
+        if(av === bv) continue;
 
-        const diff=Math.abs(av-bv);
+        const diff = Math.abs(av - bv);
+        const max = Math.max(Math.abs(av), Math.abs(bv));
 
-        const max=Math.max(Math.abs(av),Math.abs(bv));
+        if(max === 0) continue;
 
-        if(max===0) continue;
+        const pct = diff / max;
 
-        const pct=diff/max;
+        // Only reject if the matchup is farther apart than allowed
+        if(pct > maxDifference) continue;
 
-        if(pct>.35) continue;
-
-        return{
+        return {
             a,
             b,
             av,
@@ -535,7 +538,27 @@ function choosePlayers(players,column,higher){
 
     }
 
-    return null;
+    // Fallback in case no close matchup is found
+    while(true){
+
+        const a = randomItem(players);
+        const b = randomItem(players);
+
+        if(a.Name === b.Name) continue;
+
+        const av = numeric(a[column]);
+        const bv = numeric(b[column]);
+
+        if(isNaN(av) || isNaN(bv) || av === bv) continue;
+
+        return {
+            a,
+            b,
+            av,
+            bv
+        };
+
+    }
 
 }
 
