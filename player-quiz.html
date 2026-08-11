@@ -230,9 +230,7 @@ function toggleMenu(){
 
 <h1>BWBL Trivia Challenge</h1>
 
-<div class="subtitle">
-How well do you know the BWBL?
-</div>
+<div id="subtitle" class="subtitle"></div>
 
 <div class="scoreboard">
 
@@ -496,10 +494,71 @@ function numeric(v){
 
 }
 
-function choosePlayers(players,column,higher){
+function getDifficulty(){
 
-    // Start at 100% difference allowed and decrease by 5% each correct answer
+    // 5%, 10%, 15%, ...
+    return Math.min(100, (score + 1) * 5);
+
+}
+
+function hitterMinimumGP(){
+
+    // 80,75,70,65...
+    return Math.max(0, 80 - (score * 5));
+
+}
+
+function pitcherMinimumIP(){
+
+    // 90,85,80...
+    return Math.max(0, 90 - (score * 5));
+
+}
+
+function updateDifficultyDisplay(){
+
+    const difficulty = getDifficulty();
+
+    const red = Math.min(220, difficulty * 2.2);
+
+    document.getElementById("subtitle").innerHTML =
+        "Difficulty: <strong>"+difficulty+"%</strong>";
+
+    document.getElementById("subtitle").style.color =
+        "rgb("+red+",40,40)";
+
+}
+
+function choosePlayers(players, column, higher, isHitter){
+
+    // Starts at 100% and gets 5% stricter each correct answer
     const maxDifference = Math.max(0.05, 1 - (score * 0.05));
+
+    // Filter players based on current difficulty
+    let eligible;
+
+    if(isHitter){
+
+        const minGP = Math.max(0, 80 - (score * 5));
+
+        eligible = players.filter(p =>
+            Number(p.GP) >= minGP
+        );
+
+    }else{
+
+        const minIP = Math.max(0, 90 - (score * 5));
+
+        eligible = players.filter(p =>
+            parseFloat(p.IP) >= minIP
+        );
+
+    }
+
+    // Safety fallback if too few eligible players
+    if(eligible.length < 2){
+        eligible = players;
+    }
 
     let attempts = 0;
 
@@ -507,8 +566,8 @@ function choosePlayers(players,column,higher){
 
         attempts++;
 
-        const a = randomItem(players);
-        const b = randomItem(players);
+        const a = randomItem(eligible);
+        const b = randomItem(eligible);
 
         if(a.Name === b.Name) continue;
 
@@ -526,7 +585,6 @@ function choosePlayers(players,column,higher){
 
         const pct = diff / max;
 
-        // Only reject if the matchup is farther apart than allowed
         if(pct > maxDifference) continue;
 
         return {
@@ -538,18 +596,20 @@ function choosePlayers(players,column,higher){
 
     }
 
-    // Fallback in case no close matchup is found
+    // If we couldn't find a close enough matchup, just return any valid one
     while(true){
 
-        const a = randomItem(players);
-        const b = randomItem(players);
+        const a = randomItem(eligible);
+        const b = randomItem(eligible);
 
         if(a.Name === b.Name) continue;
 
         const av = numeric(a[column]);
         const bv = numeric(b[column]);
 
-        if(isNaN(av) || isNaN(bv) || av === bv) continue;
+        if(isNaN(av) || isNaN(bv)) continue;
+
+        if(av === bv) continue;
 
         return {
             a,
@@ -564,6 +624,8 @@ function choosePlayers(players,column,higher){
 
 function nextQuestion(){
 
+    updateDifficultyDisplay();
+
     document.getElementById("result").textContent="";
     document.getElementById("details").innerHTML="";
 
@@ -577,10 +639,11 @@ function nextQuestion(){
         useHitters ? hittingStats : pitchingStats
     );
 
-    const players=choosePlayers(
+    const players = choosePlayers(
         useHitters ? hitters : pitchers,
         stat.column,
-        stat.higher
+        stat.higher,
+        useHitters
     );
 
     if(!players){
@@ -655,6 +718,8 @@ function answer(choice){
 
         score++;
 
+        updateDifficultyDisplay();
+
         document.getElementById("score").textContent=score;
 
         document.getElementById("result").innerHTML=
@@ -710,6 +775,8 @@ document.getElementById("restartBtn")
 .addEventListener("click",()=>{
 
     score=0;
+
+    updateDifficultyDisplay();
 
     document.getElementById("score").textContent=0;
 
