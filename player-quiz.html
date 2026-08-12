@@ -296,7 +296,7 @@ function toggleMenu(){
 
 <div id="leaderboards">
 
-<h2>🏆 All-Time Top 5</h2>
+<h2>All-Time Leaderboard</h2>
 
 <div id="top5">
 Loading...
@@ -304,7 +304,7 @@ Loading...
 
 <br>
 
-<h2>⭐ Weekly Champion</h2>
+<h2>Weekly High Score</h2>
 
 <div id="weeklyChampion">
 Loading...
@@ -474,6 +474,121 @@ function parseCSV(text){
     }
 
     return data;
+
+}
+
+async function loadLeaderboards(){
+
+    // ---------- ALL-TIME TOP 5 ----------
+
+    const { data: top5, error: topError } = await db
+        .from("scores")
+        .select("name, score")
+        .order("score", { ascending: false })
+        .order("created_at", { ascending: true })
+        .limit(5);
+
+    if(topError){
+
+        document.getElementById("top5").innerHTML =
+            "<span style='color:red'>Unable to load leaderboard.</span>";
+
+    }else{
+
+        const medals = ["🥇","🥈","🥉","4.","5."];
+
+        if(top5.length === 0){
+
+            document.getElementById("top5").innerHTML =
+                "No scores yet.";
+
+        }else{
+
+            document.getElementById("top5").innerHTML =
+                top5.map((p,i)=>
+                    `<div style="display:flex;justify-content:space-between;max-width:320px;margin:8px auto;font-size:20px;">
+                        <span>${medals[i]} ${p.name}</span>
+                        <strong>${p.score}</strong>
+                    </div>`
+                ).join("");
+
+        }
+
+    }
+
+    // ---------- WEEKLY CHAMPION ----------
+
+    const now = new Date();
+
+    // Convert to New York time
+    const eastern = new Date(
+        now.toLocaleString("en-US",{
+            timeZone:"America/New_York"
+        })
+    );
+
+    const start = new Date(eastern);
+
+    // Monday = 1
+    const day = start.getDay();
+
+    const diff = (day === 0 ? 6 : day - 1);
+
+    start.setDate(start.getDate() - diff);
+
+    start.setHours(0,1,0,0);
+
+    // Convert back to UTC ISO string for Supabase
+    const startISO = new Date(
+        start.getTime() - eastern.getTimezoneOffset()*60000
+    ).toISOString();
+
+    const { data: weekly, error: weeklyError } = await db
+        .from("scores")
+        .select("name, score")
+        .gte("created_at", startISO)
+        .order("score",{ascending:false})
+        .order("created_at",{ascending:true})
+        .limit(1);
+
+    if(weeklyError){
+
+        document.getElementById("weeklyChampion").innerHTML =
+            "<span style='color:red'>Unable to load weekly champion.</span>";
+
+    }else if(weekly.length===0){
+
+        document.getElementById("weeklyChampion").innerHTML =
+            "<strong>No scores yet this week.</strong>";
+
+    }else{
+
+        const champ = weekly[0];
+
+        const options = {
+            month:"short",
+            day:"numeric",
+            year:"numeric",
+            timeZone:"America/New_York"
+        };
+
+        document.getElementById("weeklyChampion").innerHTML = `
+            <div style="text-align:center;">
+                <div style="font-size:26px;font-weight:bold;">
+                    ${champ.name}
+                </div>
+
+                <div style="font-size:42px;color:#0b2e59;font-weight:bold;">
+                    ${champ.score}
+                </div>
+
+                <div style="color:#666;">
+                    Week of ${start.toLocaleDateString("en-US",options)}
+                </div>
+            </div>
+        `;
+
+    }
 
 }
 
@@ -838,6 +953,8 @@ document.getElementById("restartBtn")
 loadData();
 
 updateDifficultyDisplay();
+
+loadLeaderboards();
 
 </script>
 
