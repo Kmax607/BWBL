@@ -549,6 +549,10 @@ async function loadLeaderboards(){
 
     const start = new Date(eastern);
 
+    const { count: totalPlays } = await db
+    .from("scores")
+    .select("*", { count: "exact", head: true });
+    
     // Monday = 1
     const day = start.getDay();
 
@@ -593,18 +597,17 @@ async function loadLeaderboards(){
         };
 
         document.getElementById("weeklyChampion").innerHTML = `
-            <div style="text-align:center;">
-                <div style="font-size:26px;font-weight:bold;">
-                    ${champ.name}
-                </div>
-
-                <div style="font-size:42px;color:#0b2e59;font-weight:bold;">
-                    ${champ.score}
-                </div>
-
-                <div style="color:#666;">
-                    Week of ${start.toLocaleDateString("en-US",options)}
-                </div>
+            <div style="display:flex;justify-content:space-between;max-width:320px;margin:8px auto;font-size:20px;">
+                <span>🥇 ${champ.name}</span>
+                <strong>${champ.score}</strong>
+            </div>
+        
+            <div style="margin-top:12px;color:#666;font-size:14px;">
+                Week of ${start.toLocaleDateString("en-US", options)}
+            </div>
+        
+            <div style="margin-top:18px;font-size:16px;color:#0b2e59;font-weight:bold;">
+                Total Plays: ${totalPlays.toLocaleString()}
             </div>
         `;
 
