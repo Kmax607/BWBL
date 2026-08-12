@@ -838,6 +838,128 @@ function nextQuestion(){
 
 }
 
+async function submitScore(finalScore){
+
+    if(finalScore <= 0) return;
+
+    // ----- Check current Top 5 -----
+
+    const { data: top5 } = await db
+        .from("scores")
+        .select("score")
+        .order("score",{ascending:false})
+        .order("created_at",{ascending:true})
+        .limit(5);
+
+    let qualifiesTop5 = false;
+
+    if(top5.length < 5){
+
+        qualifiesTop5 = true;
+
+    }else if(finalScore > top5[top5.length-1].score){
+
+        qualifiesTop5 = true;
+
+    }
+
+    // ----- Check Weekly Champion -----
+
+    const now = new Date();
+
+    const eastern = new Date(
+        now.toLocaleString("en-US",{
+            timeZone:"America/New_York"
+        })
+    );
+
+    const monday = new Date(eastern);
+
+    const day = monday.getDay();
+
+    monday.setDate(
+        monday.getDate()-(day===0?6:day-1)
+    );
+
+    monday.setHours(0,1,0,0);
+
+    const startISO = new Date(
+        monday.getTime()-eastern.getTimezoneOffset()*60000
+    ).toISOString();
+
+    const { data: weekly } = await db
+        .from("scores")
+        .select("score")
+        .gte("created_at",startISO)
+        .order("score",{ascending:false})
+        .limit(1);
+
+    let qualifiesWeekly =
+        weekly.length===0 ||
+        finalScore > weekly[0].score;
+
+    // Nothing to do
+
+    if(!qualifiesTop5 && !qualifiesWeekly)
+        return;
+
+    // ----- Player name -----
+
+    let playerName =
+        localStorage.getItem("bwblPlayerName");
+
+    if(!playerName){
+
+        playerName = prompt(
+            "🏆 Congratulations!\n\nEnter your name for the leaderboard:"
+        );
+
+        if(!playerName) return;
+
+        playerName = playerName.trim();
+
+        if(playerName==="") return;
+
+        localStorage.setItem(
+            "bwblPlayerName",
+            playerName
+        );
+
+    }
+
+    // ----- Upload -----
+
+    await db
+        .from("scores")
+        .insert({
+            name:playerName,
+            score:finalScore
+        });
+
+    // ----- Trim All-Time to Top 5 -----
+
+    const { data: allScores } = await db
+        .from("scores")
+        .select("id,score")
+        .order("score",{ascending:false})
+        .order("created_at",{ascending:true});
+
+    if(allScores.length>5){
+
+        const remove =
+            allScores.slice(5).map(s=>s.id);
+
+        await db
+            .from("scores")
+            .delete()
+            .in("id",remove);
+
+    }
+
+    loadLeaderboards();
+
+}
+
 function answer(choice){
 
     if(!currentQuestion) return;
@@ -903,6 +1025,8 @@ function answer(choice){
                 bestScore;
 
         }
+
+        submitScore(score);
 
         document.getElementById("restartBtn").style.display="block";
 
