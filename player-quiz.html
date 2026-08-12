@@ -519,13 +519,28 @@ function updateDifficultyDisplay(){
 
     const difficulty = getDifficulty();
 
-    const red = Math.min(220, difficulty * 2.2);
+    let color;
+
+    if(difficulty <= 10){
+        color = "#8BC34A";          // Light Green
+    }else if(difficulty <= 25){
+        color = "#2E7D32";          // Dark Green
+    }else if(difficulty <= 35){
+        color = "#FBC02D";          // Yellow
+    }else if(difficulty <= 50){
+        color = "#FB8C00";          // Orange
+    }else if(difficulty <= 60){
+        color = "#D2691E";          // Burnt Orange
+    }else if(difficulty <= 75){
+        color = "#E53935";          // Light Red
+    }else{
+        color = "#8B0000";          // Dark Red
+    }
 
     document.getElementById("subtitle").innerHTML =
-        "Difficulty: <strong>"+difficulty+"%</strong>";
+        "Difficulty: <strong>" + difficulty + "%</strong>";
 
-    document.getElementById("subtitle").style.color =
-        "rgb("+red+",40,40)";
+    document.getElementById("subtitle").style.color = color;
 
 }
 
@@ -624,8 +639,6 @@ function choosePlayers(players, column, higher, isHitter){
 
 function nextQuestion(){
 
-    updateDifficultyDisplay();
-
     document.getElementById("result").textContent="";
     document.getElementById("details").innerHTML="";
 
@@ -718,8 +731,6 @@ function answer(choice){
 
         score++;
 
-        updateDifficultyDisplay();
-
         document.getElementById("score").textContent=score;
 
         document.getElementById("result").innerHTML=
@@ -760,6 +771,8 @@ document.getElementById("player2")
 
 document.getElementById("nextBtn")
 .addEventListener("click",()=>{
+
+    updateDifficultyDisplay();
 
     document.getElementById("player1")
         .classList.remove("disabled");
