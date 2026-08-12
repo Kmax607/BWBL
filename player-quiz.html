@@ -310,52 +310,52 @@ document.getElementById("bestScore").textContent=bestScore;
 const hittingStats=[
 {
 column:"AVG",
-label:"had a higher batting average",
+label:"se batting average is higher",
 higher:true
 },
 {
 column:"OBP",
-label:"had a higher on base percentage",
+label:"se on base percentage is higher",
 higher:true
 },
 {
 column:"H",
-label:"had more hits",
+label:" has had more hits",
 higher:true
 },
 {
 column:"2B",
-label:"had more doubles",
+label:" has had more doubles",
 higher:true
 },
 {
 column:"3B",
-label:"had more triples",
+label:" has had more triples",
 higher:true
 },
 {
 column:"HR",
-label:"had more home runs",
+label:" has had more home runs",
 higher:true
 },
 {
 column:"RBI",
-label:"had more runs batted in",
+label:" has had more RBIs",
 higher:true
 },
 {
 column:"R",
-label:"scored more runs",
+label:" has scored more runs",
 higher:true
 },
 {
 column:"BB",
-label:"drew more walks",
+label:" has drawn more walks",
 higher:true
 },
 {
 column:"K",
-label:"struck out more",
+label:" has struck out more times",
 higher:true
 }
 ];
@@ -363,37 +363,37 @@ higher:true
 const pitchingStats=[
 {
 column:"W",
-label:"had more pitching wins",
+label:" has had more pitching wins",
 higher:true
 },
 {
 column:"ERA",
-label:"had a lower ERA",
+label:"se ERA is lower",
 higher:false
 },
 {
 column:"K",
-label:"struck out more batters",
+label:" has struck out more batters",
 higher:true
 },
 {
 column:"WHIP",
-label:"had a lower WHIP",
+label:"se WHIP is lower",
 higher:false
 },
 {
 column:"IP",
-label:"pitched more innings",
+label:" has pitched more innings",
 higher:true
 },
 {
 column:"BB",
-label:"allowed fewer walks",
+label:" has walked fewer batters",
 higher:false
 },
 {
 column:"H",
-label:"allowed fewer hits",
+label:" has given up fewer hits",
 higher:false
 }
 ];
@@ -678,7 +678,7 @@ function nextQuestion(){
         useHitters ? "Hitting" : "Pitching";
 
     document.getElementById("question").textContent=
-        "Who "+stat.label+"?";
+        "Who"+stat.label+"?";
 
     document.getElementById("player1Name").textContent=
         players.a.Name;
