@@ -57,6 +57,44 @@
             margin-right: 5px;
         }
         }
+
+        .logo-ticker {
+            width: 100%;
+            overflow: hidden;
+            margin: 45px 0;
+            position: relative;
+        }
+        
+        .logo-track {
+            display: flex;
+            align-items: center;
+            width: max-content;
+            animation: scrollLogos 40s linear infinite;
+        }
+        
+        .logo-track img {
+            width: 65px;
+            height: 65px;
+            margin: 0 14px;
+            object-fit: cover;
+            border-radius: 50%;
+            background: white;
+            padding: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,.18);
+            flex-shrink: 0;
+        }
+        
+        @keyframes scrollLogos {
+        
+            from{
+                transform:translateX(0);
+            }
+        
+            to{
+                transform:translateX(-50%);
+            }
+        
+        }
     </style>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1009184751283570"
@@ -80,7 +118,11 @@
 
 <p></p>
 
-<br><br><br>
+<br>
+<div class="logo-ticker">
+    <div class="logo-track" id="logoTrack"></div>
+</div>
+<br>
 
 <div class="logo-container">
     <img src="bwbl-2022.png" alt="BWBL Logo">
@@ -104,10 +146,54 @@
     }
 </script>
 
-<!-- GoatCounter Visitor Tracking -->
-<script data-goatcounter="https://bwbl.goatcounter.com/count"
-        async
-        src="//gc.zgo.at/count.js"></script>
+const logos = [
+
+    "team1.png",
+    "team2.png",
+    "team3.png",
+    "team4.png",
+    "team5.png",
+    "team6.png",
+    "team7.png",
+    "team8.png",
+    "team9.png",
+    "team10.png",
+    "team11.png",
+    "team12.png",
+    "team13.png",
+    "team14.png",
+    "team15.png",
+    "team16.png",
+    "team17.png"
+
+];
+
+// Fisher-Yates shuffle
+for(let i = logos.length - 1; i > 0; i--){
+
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [logos[i], logos[j]] = [logos[j], logos[i]];
+
+}
+
+const track = document.getElementById("logoTrack");
+
+// Add the shuffled logos twice so the animation loops seamlessly
+const tickerLogos = [...logos, ...logos];
+
+tickerLogos.forEach(src=>{
+
+    const img = document.createElement("img");
+
+    img.src = src;
+
+    img.alt = "";
+
+    track.appendChild(img);
+
+});
+    
 
 </body>
 </html>
