@@ -4,102 +4,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BWBL Home</title>
+
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="bwbl-2022.png">
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
+
+        body{
+            font-family:Arial,sans-serif;
+            margin:0;
+            padding:0;
+            background:#f0f0f0;
         }
 
-        .big-t {
-            font-size: 2.5em;
-            text-align: center;
-            margin-top: 50px;
-            color: #333;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            font-weight: bold;
-            text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+        .big-t{
+            font-size:2.5em;
+            text-align:center;
+            margin-top:50px;
+            color:#333;
+            text-transform:uppercase;
+            letter-spacing:5px;
+            font-weight:bold;
+            text-shadow:2px 2px 2px rgba(0,0,0,.5);
         }
 
-        .image-container {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 18px;
-        }
-        
-        .image-container img {
-            width: auto;
-            max-width: 85%;
-            height: auto;
-            border-radius: 10px;
+        .image-container{
+            display:flex;
+            justify-content:center;
+            margin-top:18px;
         }
 
-        .logo-container {
-            text-align: center;
-            margin-top: 20px;
+        .image-container img{
+            width:auto;
+            max-width:85%;
+            height:auto;
+            border-radius:10px;
         }
 
-        .logo-container img {
-            max-width: 300px;
-            height: auto;
+        .logo-container{
+            text-align:center;
+            margin-top:25px;
         }
 
-        /* CSS for the logo */
-        nav ul li a img {
-            width: 3em;
-            height: auto;
-            vertical-align: middle;
-            margin-right: 5px;
-        }
+        .logo-container img{
+            max-width:300px;
+            height:auto;
         }
 
-        .logo-ticker {
-            width: 100%;
-            overflow: hidden;
-            margin: 45px 0;
-            position: relative;
+        nav ul li a img{
+            width:3em;
+            height:auto;
+            vertical-align:middle;
+            margin-right:5px;
         }
-        
-        .logo-track {
-            display: flex;
-            align-items: center;
-            width: max-content;
-            animation: scrollLogos 40s linear infinite;
+
+        /* ===========================
+           TEAM LOGO TICKER
+           =========================== */
+
+        .logo-ticker{
+
+            width:100%;
+            overflow:hidden;
+            margin:45px 0;
+
         }
-        
-        .logo-track img {
-            width: 65px;
-            height: 65px;
-            margin: 0 14px;
-            object-fit: cover;
-            border-radius: 50%;
-            background: white;
-            padding: 4px;
-            box-shadow: 0 2px 6px rgba(0,0,0,.18);
-            flex-shrink: 0;
+
+        .logo-track{
+
+            display:flex;
+            align-items:center;
+            width:max-content;
+
+            animation:scrollTicker 38s linear infinite;
+
         }
-        
-        @keyframes scrollLogos {
-        
+
+        .logo-track:hover{
+
+            animation-play-state:paused;
+
+        }
+
+        .logo-track img{
+
+            width:68px;
+            height:68px;
+
+            border-radius:50%;
+
+            object-fit:cover;
+
+            margin:0 14px;
+
+            background:#fff;
+
+            border:3px solid white;
+
+            box-shadow:
+                0 3px 8px rgba(0,0,0,.18);
+
+            flex-shrink:0;
+
+            transition:.2s;
+
+        }
+
+        .logo-track img:hover{
+
+            transform:scale(1.08);
+
+        }
+
+        @keyframes scrollTicker{
+
             from{
+
                 transform:translateX(0);
+
             }
-        
+
             to{
+
                 transform:translateX(-50%);
+
             }
-        
+
         }
+
+        @media(max-width:700px){
+
+            .logo-track img{
+
+                width:52px;
+                height:52px;
+                margin:0 10px;
+
+            }
+
+        }
+
     </style>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1009184751283570"
-            crossorigin="anonymous"></script>
+    <script async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1009184751283570"
+        crossorigin="anonymous"></script>
+
 </head>
+
 <body>
 
 <script src="header.js"></script>
@@ -116,12 +168,16 @@
     <img src="New BWBL Home Image.png" alt="BWBL Home">
 </div>
 
-<p></p>
-
 <br>
+
 <div class="logo-ticker">
-    <div class="logo-track" id="logoTrack"></div>
+
+    <div class="logo-track" id="logoTrack">
+
+    </div>
+
 </div>
+
 <br>
 
 <div class="logo-container">
@@ -135,6 +191,7 @@
 <div id="footer-container"></div>
 
 <script>
+
     fetch('footer.html')
         .then(response => response.text())
         .then(data => {
@@ -144,56 +201,79 @@
     function toggleMenu() {
         document.getElementById("dropdown-nav").classList.toggle("show");
     }
+
+    // -----------------------------
+    // TEAM LOGO TICKER
+    // -----------------------------
+
+    const logos = [
+
+        "1776.png",
+        "17762.png",
+        "ballbusters.png",
+        "basesloaded.png",
+        "bde.png",
+        "diamonddogs.png",
+        "electriccityexpress.png",
+        "falseidols.png",
+        "fivelokos.png",
+        "flyingsquirrels.png",
+        "jenkinsowls.png",
+        "kingsofthenorth.png",
+        "moonshots.png",
+        "phoenix.png",
+        "roadkill.png",
+        "scaredhitless.png",
+        "snackshack.png",
+        "the570.png",
+        "venomvipers.png"
+
+    ];
+
+    // Shuffle logos every page load
+
+    function shuffle(array){
+
+        for(let i=array.length-1;i>0;i--){
+
+            const j=Math.floor(Math.random()*(i+1));
+
+            [array[i],array[j]]=[array[j],array[i]];
+
+        }
+
+        return array;
+
+    }
+
+    shuffle(logos);
+
+    const track=document.getElementById("logoTrack");
+
+    // Duplicate list for seamless scrolling
+
+    [...logos,...logos].forEach(file=>{
+
+        const img=document.createElement("img");
+
+        img.src=file;
+
+        img.alt=file.replace(".png","");
+
+        img.loading="lazy";
+
+        track.appendChild(img);
+
+    });
+
 </script>
 
-const logos = [
-    "1776.png",
-    "17762.png",
-    "ballbusters.png",
-    "basesloaded.png",
-    "bde.png",
-    "diamonddogs.png",
-    "electriccityexpress.png",
-    "falseidols.png",
-    "fivelokos.png",
-    "flyingsquirrels.png",
-    "jenkinsowls.png",
-    "kingsofthenorth.png",
-    "moonshots.png",
-    "phoenix.png",
-    "roadkill.png",
-    "scaredhitless.png",
-    "snackshack.png",
-    "the570.png",
-    "venomvipers.png"
-];
-
-// Fisher-Yates shuffle
-for(let i = logos.length - 1; i > 0; i--){
-
-    const j = Math.floor(Math.random() * (i + 1));
-
-    [logos[i], logos[j]] = [logos[j], logos[i]];
-
-}
-
-const track = document.getElementById("logoTrack");
-
-// Add the shuffled logos twice so the animation loops seamlessly
-const tickerLogos = [...logos, ...logos];
-
-tickerLogos.forEach(src=>{
-
-    const img = document.createElement("img");
-
-    img.src = src;
-
-    img.alt = "";
-
-    track.appendChild(img);
-
-});
-    
+<!-- GoatCounter Visitor Tracking -->
+<script
+    data-goatcounter="https://bwbl.goatcounter.com/count"
+    async
+    src="//gc.zgo.at/count.js">
+</script>
 
 </body>
 </html>
