@@ -66,7 +66,8 @@
 
             width:100%;
             overflow:hidden;
-            margin:45px 0;
+            padding:12px 0;
+            margin:33px 0;
 
         }
 
@@ -80,10 +81,26 @@
 
         }
 
-        .logo-track:hover{
+        .logo-track.reverse{
 
-            animation-play-state:paused;
-
+            animation:scrollReverse 38s linear infinite;
+        
+        }
+        
+        @keyframes scrollReverse{
+        
+            from{
+        
+                transform:translateX(-50%);
+        
+            }
+        
+            to{
+        
+                transform:translateX(0);
+        
+            }
+        
         }
 
         .logo-track img{
@@ -102,7 +119,7 @@
             border:3px solid white;
 
             box-shadow:
-                0 3px 8px rgba(0,0,0,.18);
+                0 4px 10px rgba(0,0,0,.18);
 
             flex-shrink:0;
 
@@ -110,11 +127,6 @@
 
         }
 
-        .logo-track img:hover{
-
-            transform:scale(1.08);
-
-        }
 
         @keyframes scrollTicker{
 
@@ -162,7 +174,13 @@
     Welcome to the Home of the BWBL
 </div>
 
-<br><br>
+<br>
+    <div class="logo-ticker">
+    <div class="logo-track reverse" id="logoTrackTop"></div>
+</div>
+
+<br>
+    <br>
 
 <div class="image-container">
     <img src="New BWBL Home Image.png" alt="BWBL Home">
@@ -244,25 +262,35 @@
 
     }
 
-    shuffle(logos);
+    const topLogos = [...logos];
+    const bottomLogos = [...logos];
+    
+    shuffle(topLogos);
+    shuffle(bottomLogos);
 
-    const track=document.getElementById("logoTrack");
+    const bottomTrack = document.getElementById("logoTrack");
+    const topTrack = document.getElementById("logoTrackTop");
+    
+    function fillTrack(track, list){
 
-    // Duplicate list for seamless scrolling
-
-    [...logos,...logos].forEach(file=>{
-
-        const img=document.createElement("img");
-
-        img.src=file;
-
-        img.alt=file.replace(".png","");
-
-        img.loading="lazy";
-
-        track.appendChild(img);
-
-    });
+        [...list, ...list].forEach(file=>{
+    
+            const img = document.createElement("img");
+    
+            img.src = file;
+    
+            img.alt = "";
+    
+            img.loading = "lazy";
+    
+            track.appendChild(img);
+    
+        });
+    
+    }
+    
+    fillTrack(topTrack, topLogos);
+    fillTrack(bottomTrack, bottomLogos);
 
 </script>
 
