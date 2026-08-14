@@ -29,7 +29,7 @@ nav li a {
 }
 
 nav li a:hover {
-    color: #FFA500; /* Change color on hover */
+    color: #FE0300; /* Change color on hover */
 }
 
 footer {
@@ -80,7 +80,7 @@ footer p {
 }
 
 .blog-title:hover {
-    color: #FFA500;
+    color: #FE0300;
     text-decoration: none; /* Remove underline on hover */
 }
 
@@ -143,7 +143,7 @@ header {
 
 .menu-toggle:hover {
     background-color: #444;
-    color: #FFA500;
+    color: #FE0300;
 }
 
 /* Dropdown menu */
@@ -181,7 +181,7 @@ nav ul li a {
 
 nav ul li a:hover {
     background-color: #444;
-    color: #FFA500;
+    color: #FE0300;
 }
 
 .site-footer {
@@ -221,7 +221,7 @@ nav ul li a:hover {
 }
 
 .footer-section a:hover {
-    color: #FFA500;
+    color: #FE0300;
 }
 
 /* Logo and Info Block */
@@ -347,7 +347,7 @@ nav ul li a:hover {
 }
 
 .toc a:hover {
-    color: #FFA500;
+    color: #FE0300;
 }
 
 .dcp_link {
@@ -363,7 +363,7 @@ nav ul li a:hover {
 }
 
 .dcp_link a:hover {
-    color: #FFA500;
+    color: #FE0300;
 }
 
 .carousel {
@@ -411,7 +411,7 @@ nav ul li a:hover {
 }
 
 .prev:hover, .next:hover {
-    background-color: #FFA500;
+    background-color: #FE0300;
 }
 
 
